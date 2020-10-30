@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         mannco.store: Price in Classifieds
+// @name         mannco.store price in classifieds
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  add price in popup menu

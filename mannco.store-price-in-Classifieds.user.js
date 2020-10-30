@@ -33,6 +33,8 @@ function mypop() {
 };
 
 function manncoRequest(name){
+   let search_item_craftable = name.includes('Non-Craftable') ? 0 : 1;
+   if(search_item_craftable == 0) name = name.replace('Non-Craftable ', '');
    return new Promise((resolve, reject) => {
     GM.xmlHttpRequest({
     method: "POST",
@@ -43,7 +45,10 @@ function manncoRequest(name){
     url: "https://mannco.store/requests/shop.php",
     onload: function(response) {
        resolve(JSON.parse(response.responseText).filter(el=> {
-           let mannco_name = el.name.replace('Uncraftable', 'Non-Craftable');
+           let mannco_name = el.name;
+           if(el.craftable != search_item_craftable){
+               return false;
+           }
            if(el.quality == 'Unusual') {
                mannco_name = el.effect.replace('★ ', '') + ' '+ mannco_name.replace('Unusual ', '')
                return mannco_name === name

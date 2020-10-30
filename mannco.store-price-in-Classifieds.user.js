@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 waitForKeyElements (
-    "div.popover",
+    ".popover-btns#popover-price-links",
     mypop
 );
 

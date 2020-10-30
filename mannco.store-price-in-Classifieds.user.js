@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 waitForKeyElements (
-    "div.popover.right.in",
+    "div.popover",
     mypop
 );
 

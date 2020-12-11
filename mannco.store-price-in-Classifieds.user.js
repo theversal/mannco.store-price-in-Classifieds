@@ -17,6 +17,19 @@ waitForKeyElements (
 );
 
 let mannco_data = {};
+let price_boxes = $('div.price-boxes');
+
+if(price_boxes.length > 0) addPriceBoxes();
+
+async function addPriceBoxes() {
+    let item_name = $('div.stats-header-title')[0].innerText;
+    mannco_data[item_name] = await manncoRequest(item_name) || null;
+    let manncoArray = !mannco_data[item_name] ? false : mannco_data[item_name];
+    if(manncoArray) {
+        price_boxes.append('<a class="price-box" href="https://mannco.store/item/' + manncoArray.id + '" data-tip="top" target="_blank" title="" data-original-title="Mannco.Store"> <img src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/4b/4b2b43c016a3fa7d915f99df1ef9436b7ad4a0ad_full.jpg"> <div class="text"> <div class="value">  $'+ Number(manncoArray.pp)/100 +' </div> <div class="subtitle"> '+ manncoArray.nbb+' available </div> </div> </a>')
+    }
+}
+
 function mypop() {
     let buttons = $('.popover-btns#popover-price-links')
     let item_name = $('h3.popover-title')[0].innerText
